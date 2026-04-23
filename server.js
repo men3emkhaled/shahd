@@ -111,6 +111,11 @@ app.post('/api/products', isAuthenticated, async (req, res) => {
     }
 });
 
+// Serve Admin Dashboard
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin', 'index.html'));
+});
+
 // Delete product
 app.delete('/api/products/:id', isAuthenticated, async (req, res) => {
     try {
