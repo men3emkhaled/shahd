@@ -125,7 +125,7 @@ app.delete(['/api/products/:id', '/products/:id'], isAuthenticated, async (req, 
     }
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.VERCEL) {
     app.listen(port, () => {
         console.log(`Server running at http://localhost:${port}`);
     });
