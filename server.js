@@ -1,7 +1,5 @@
 const express = require('express');
 const { Pool } = require('pg');
-const multer = require('multer');
-const axios = require('axios');
 const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
@@ -92,38 +90,23 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// Upload and add product
-const upload = multer({ storage: multer.memoryStorage() });
-
-app.post('/api/products', isAuthenticated, upload.single('image'), async (req, res) => {
+app.post('/api/products', isAuthenticated, async (req, res) => {
     try {
-        const { title, category, price } = req.body;
-        const imgbbApiKey = process.env.IMGBB_API_KEY;
+        const { title, category, imageUrl, price } = req.body;
 
-        if (!req.file) {
-            return res.status(400).json({ error: 'No image uploaded' });
+        if (!imageUrl) {
+            return res.status(400).json({ error: 'Image URL is required' });
         }
-
-        if (!imgbbApiKey) {
-            return res.status(500).json({ error: 'ImgBB API Key is missing' });
-        }
-
-        // Upload to ImgBB
-        const formData = new URLSearchParams();
-        formData.append('image', req.file.buffer.toString('base64'));
-
-        const imgbbResponse = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
-        const imageUrl = imgbbResponse.data.data.url;
 
         // Save to Database
         const result = await pool.query(
             'INSERT INTO products (title, category, image_url, price) VALUES ($1, $2, $3, $4) RETURNING *',
-            [title, category, price]
+            [title, category, imageUrl, price]
         );
 
         res.json(result.rows[0]);
     } catch (err) {
-        console.error('Upload error:', err.response?.data || err.message);
+        console.error('Save error:', err.message);
         res.status(500).json({ error: err.message });
     }
 });
