@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = emptyMsgHtml;
-            const msg = document.getElementById('empty-cart-msg');
-            if (msg) msg.style.display = 'block';
         } else {
             let html = '';
             cart.forEach((item, index) => {
@@ -60,16 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsContainer.innerHTML = html;
 
             document.querySelectorAll('.qty-btn.plus').forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.onclick = (e) => {
                     const idx = e.target.getAttribute('data-index');
                     cart[idx].quantity++;
                     saveCart();
                     updateCartUI();
-                });
+                };
             });
 
             document.querySelectorAll('.qty-btn.minus').forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.onclick = (e) => {
                     const idx = e.target.getAttribute('data-index');
                     if (cart[idx].quantity > 1) {
                         cart[idx].quantity--;
@@ -78,24 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     saveCart();
                     updateCartUI();
-                });
+                };
             });
 
             document.querySelectorAll('.remove-item').forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.onclick = (e) => {
                     const idx = e.currentTarget.getAttribute('data-index');
                     cart.splice(idx, 1);
                     saveCart();
                     updateCartUI();
-                });
+                };
             });
         }
     }
 
     function saveCart() {
-        try {
-            localStorage.setItem('cart', JSON.stringify(cart));
-        } catch(e) {}
+        try { localStorage.setItem('cart', JSON.stringify(cart)); } catch(e) {}
     }
 
     function toggleCart() {
@@ -104,12 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartUI();
     }
 
-    if (cartToggle) cartToggle.addEventListener('click', toggleCart);
-    if (closeCart) closeCart.addEventListener('click', toggleCart);
-    if (cartOverlay) cartOverlay.addEventListener('click', toggleCart);
+    if (cartToggle) cartToggle.onclick = toggleCart;
+    if (closeCart) closeCart.onclick = toggleCart;
+    if (cartOverlay) cartOverlay.onclick = toggleCart;
 
     if (btnCheckout) {
-        btnCheckout.addEventListener('click', () => {
+        btnCheckout.onclick = () => {
             if (cart.length === 0) {
                 alert(document.documentElement.lang === 'en' ? 'Your cart is empty!' : 'السلة فارغة!');
                 return;
@@ -119,201 +115,179 @@ document.addEventListener('DOMContentLoaded', () => {
             message += "\nشكراً لكم.";
             const whatsappUrl = `https://wa.me/201008137386?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-        });
+        };
     }
 
     updateCartUI();
 
-    // Navbar Toggle
+    // Navbar
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
+    hamburger.onclick = () => {
         navLinks.classList.toggle('active');
         const links = document.querySelectorAll('.nav-links li');
         links.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = '';
-            } else {
-                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-            }
+            if (link.style.animation) link.style.animation = '';
+            else link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
         });
-    });
+    };
 
     // Sticky Header
-    const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) { header.classList.add('scrolled'); } 
-        else { header.classList.remove('scrolled'); }
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
     });
 
-    // Scroll Reveal Animation
-    function setupReveal() {
-        const revealElements = document.querySelectorAll('.fade-in-up, .reveal-left, .reveal-right, .reveal-up');
-        if (typeof IntersectionObserver !== 'undefined') {
-            const observerOptions = { threshold: 0.05, rootMargin: "50px" };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) { entry.target.classList.add('visible'); }
-                });
-            }, observerOptions);
-            revealElements.forEach(el => observer.observe(el));
-        } else {
-            revealElements.forEach(el => el.classList.add('visible'));
-        }
-    }
-
-    // Dynamic Product Loading
+    // Dynamic Content Loading
     async function loadDynamicProducts() {
         try {
             const res = await fetch('/api/products');
             const products = await res.json();
             
-            // Group products by category
             const grouped = products.reduce((acc, p) => {
                 if (!acc[p.category]) acc[p.category] = [];
                 acc[p.category].push(p);
                 return acc;
             }, {});
 
-            // Populate containers
             for (const category in grouped) {
                 const container = document.getElementById(`gallery-${category}`);
-                const slider = category === 'reviews' ? document.getElementById('reviews-slider') : null;
+                const reviewsSlider = document.getElementById('reviews-slider');
                 
-                if (container || slider) {
-                    const target = slider || container;
-                    target.innerHTML = grouped[category].map((p, index) => {
-                        if (category === 'reviews') {
-                            return `<div class="review-item"><img src="${p.image_url}" alt="Review"></div>`;
-                        }
-                        
-                        const productName = p.title || `منتج رقم ${index + 1}`;
-                        return `
-                            <div class="product-item">
-                                <img src="${p.image_url}" alt="${productName}" class="dynamic-img">
-                                <span class="product-badge">${productName}</span>
-                                <a href="#" class="btn-order" data-name="${productName}" data-img="${p.image_url}">
-                                    <i class="fa-brands fa-whatsapp" style="margin-left: 8px;"></i> أضف للسلة
-                                </a>
-                            </div>
-                        `;
-                    }).join('');
+                if (category === 'reviews' && reviewsSlider) {
+                    reviewsSlider.innerHTML = grouped[category].map(p => `
+                        <div class="review-item"><img src="${p.image_url}" alt="Review"></div>
+                    `).join('');
+                } else if (container) {
+                    container.innerHTML = grouped[category].map(p => `
+                        <img src="${p.image_url}" alt="${p.title || ''}">
+                    `).join('');
                 }
             }
 
-            // Re-attach listeners for dynamic content
-            attachOrderListeners();
-            setupLightbox();
+            // Run original gallery logic after content is loaded
+            initGalleryFeatures();
             setupReveal();
             if (document.documentElement.lang === 'en') translatePage('en');
 
-        } catch (err) {
-            console.error('Error loading products:', err);
-        }
+        } catch (err) { console.error('Load Error:', err); }
     }
 
-    function attachOrderListeners() {
-        document.querySelectorAll('.btn-order').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const productName = btn.getAttribute('data-name');
-                const productImg = btn.getAttribute('data-img');
+    function initGalleryFeatures() {
+        // Original logic to wrap images and add buttons
+        const showcaseGrids = document.querySelectorAll('.showcase-grid');
+        showcaseGrids.forEach(grid => {
+            let sectionName = 'القسم';
+            if (grid.previousElementSibling && grid.previousElementSibling.tagName === 'H3') {
+                sectionName = grid.previousElementSibling.innerText.trim();
+            } else if (grid.parentElement.querySelector('h3')) {
+                sectionName = grid.parentElement.querySelector('h3').innerText.trim();
+            }
+
+            const images = Array.from(grid.querySelectorAll('img:not(.processed)'));
+            images.forEach((img, index) => {
+                img.classList.add('processed');
+                const wrapper = document.createElement('div');
+                wrapper.className = 'product-item';
+
+                const badge = document.createElement('span');
+                badge.className = 'product-badge';
+                badge.innerText = `صورة رقم ${index + 1}`;
+
+                const orderBtn = document.createElement('a');
+                orderBtn.className = 'btn-order';
+                orderBtn.href = '#';
+                orderBtn.innerHTML = '<i class="fa-brands fa-whatsapp" style="margin-left: 8px;"></i> أضف للسلة';
+
+                const productName = `${sectionName} (صورة رقم ${index + 1})`;
+                const productImg = img.src;
+
+                orderBtn.onclick = (e) => {
+                    e.preventDefault();
+                    const existingItem = cart.find(item => item.name === productName);
+                    if (existingItem) existingItem.quantity++;
+                    else cart.push({ name: productName, imgSrc: productImg, quantity: 1 });
+                    saveCart();
+                    updateCartUI();
+                    if (!cartSidebar.classList.contains('active')) toggleCart();
+                    
+                    const originalHtml = orderBtn.innerHTML;
+                    orderBtn.innerHTML = '<i class="fa-solid fa-check" style="margin-left: 8px;"></i> تم الإضافة';
+                    setTimeout(() => { orderBtn.innerHTML = originalHtml; }, 2000);
+                };
+
+                img.parentNode.insertBefore(wrapper, img);
+                wrapper.appendChild(img);
+                wrapper.appendChild(badge);
+                wrapper.appendChild(orderBtn);
                 
-                const existingItem = cart.find(item => item.name === productName);
-                if (existingItem) { existingItem.quantity++; } 
-                else { cart.push({ name: productName, imgSrc: productImg, quantity: 1 }); }
-                
-                saveCart();
-                updateCartUI();
-                if (!cartSidebar.classList.contains('active')) toggleCart();
-                
-                const originalHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check" style="margin-left: 8px;"></i> تم الإضافة';
-                setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
+                // Add Lightbox to new images
+                img.style.cursor = 'zoom-in';
+                img.onclick = () => {
+                    const lb = document.getElementById('lightbox');
+                    const lbImg = document.getElementById('lightbox-img');
+                    lbImg.src = img.src;
+                    lb.classList.add('active');
+                };
             });
         });
     }
 
-    function setupLightbox() {
-        let lightbox = document.getElementById('lightbox');
-        if (!lightbox) {
-            lightbox = document.createElement('div');
-            lightbox.id = 'lightbox';
-            lightbox.className = 'lightbox';
-            lightbox.innerHTML = `<span class="lightbox-close">&times;</span><img class="lightbox-content" id="lightbox-img">`;
-            document.body.appendChild(lightbox);
+    function setupReveal() {
+        const revealElements = document.querySelectorAll('.fade-in-up, .reveal-left, .reveal-right, .reveal-up');
+        if (typeof IntersectionObserver !== 'undefined') {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.05, rootMargin: "50px" });
+            revealElements.forEach(el => observer.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('visible'));
         }
-
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = lightbox.querySelector('.lightbox-close');
-
-        document.querySelectorAll('.showcase-grid img, .dynamic-img, .about-image img').forEach(img => {
-            img.style.cursor = 'zoom-in';
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
-            });
-        });
-
-        lightboxClose.onclick = () => lightbox.classList.remove('active');
-        lightbox.onclick = (e) => { if (e.target !== lightboxImg) lightbox.classList.remove('active'); };
     }
+
+    // Lightbox Setup
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `<span class="lightbox-close">&times;</span><img class="lightbox-content" id="lightbox-img">`;
+    document.body.appendChild(lightbox);
+    lightbox.querySelector('.lightbox-close').onclick = () => lightbox.classList.remove('active');
+    lightbox.onclick = (e) => { if (e.target.id === 'lightbox') lightbox.classList.remove('active'); };
 
     loadDynamicProducts();
 
-    // Smooth Scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            if (this.classList.contains('dropdown-toggle') && window.innerWidth <= 768) return;
-            e.preventDefault();
-            navLinks.classList.remove('active');
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-
-    // Dark Mode
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    let savedTheme = localStorage.getItem('theme') || 'dark';
-    htmlElement.setAttribute('data-theme', savedTheme);
-    themeToggle.addEventListener('click', () => {
-        const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
-
-    // Translation System
-    const translations = {
-        "الرئيسية": "Home", "من أنا": "About Me", "منتجاتنا": "Products", "المعرض": "Gallery", "تواصل معنا": "Contact Us",
-        "شهد عبدالمنعم": "Shahd Abdelmonem", "صنع يدوي": "Handmade", "حب وشغف": "Love & Passion", "اطلبي الآن": "Order Now",
-        "أضف للسلة": "Add to Cart", "تم الإضافة": "Added"
-    };
-
+    // Translation
     function translatePage(lang) {
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
         const btn = document.getElementById('lang-toggle');
         if (btn) btn.innerText = lang === 'en' ? 'AR' : 'EN';
-
+        
         document.querySelectorAll('.btn-order').forEach(btn => {
             const isAdded = btn.innerHTML.includes('fa-check');
-            if (lang === 'en') {
-                btn.innerHTML = isAdded ? '<i class="fa-solid fa-check" style="margin-right: 8px;"></i> Added' : '<i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Add to Cart';
-            } else {
-                btn.innerHTML = isAdded ? '<i class="fa-solid fa-check" style="margin-left: 8px;"></i> تم الإضافة' : '<i class="fa-brands fa-whatsapp" style="margin-left: 8px;"></i> أضف للسلة';
-            }
+            if (lang === 'en') btn.innerHTML = isAdded ? '<i class="fa-solid fa-check"></i> Added' : '<i class="fa-brands fa-whatsapp"></i> Add to Cart';
+            else btn.innerHTML = isAdded ? '<i class="fa-solid fa-check"></i> تم الإضافة' : '<i class="fa-brands fa-whatsapp"></i> أضف للسلة';
         });
     }
 
-    const langToggleBtn = document.getElementById('lang-toggle');
-    if (langToggleBtn) {
-        let savedLang = localStorage.getItem('lang') || 'ar';
-        if (savedLang === 'en') translatePage('en');
-        langToggleBtn.addEventListener('click', () => {
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+        langToggle.onclick = () => {
             const newLang = document.documentElement.lang === 'ar' ? 'en' : 'ar';
             localStorage.setItem('lang', newLang);
             translatePage(newLang);
-        });
+        };
+        if (localStorage.getItem('lang') === 'en') translatePage('en');
     }
+
+    // Dark Mode
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.onclick = () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    };
 });
