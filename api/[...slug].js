@@ -42,7 +42,24 @@ const initDb = async () => {
             )
         `);
 
-        // Ensure columns exist (for existing tables)
+        // Migration: Handle old 'name' column if it exists
+        await pool.query(`
+            DO $$ 
+            BEGIN 
+                -- If 'name' exists and 'title' does not, rename 'name' to 'title'
+                IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='products' AND column_name='name') 
+                   AND NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='products' AND column_name='title') THEN
+                    ALTER TABLE products RENAME COLUMN name TO title;
+                END IF;
+
+                -- If 'name' still exists (maybe both existed), make it nullable to avoid constraint errors
+                IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='products' AND column_name='name') THEN
+                    ALTER TABLE products ALTER COLUMN name DROP NOT NULL;
+                END IF;
+            END $$;
+        `);
+
+        // Ensure new columns exist
         const columns = [
             { name: 'title', type: 'TEXT' },
             { name: 'image_url', type: 'TEXT' },
