@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="موقع شهد عبدالمنعم للأعمال اليدوية (Handmade). متخصصة في صناعة هدايا مميزة، بوكيهات زفاف، تطريز، ومجسمات. اكتشف أرقى المشغولات اليدوية المصنوعة بحب.">
+    <meta name="keywords" content="أعمال يدوية, مشغولات يدوية, هدايا مميزة, هاند ميد, تطريز, Handmade products, Unique gifts, Handmade crafts, بوكيهات زفاف">
+    <meta name="author" content="شهد عبدالمنعم">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="شهد عبدالمنعم | Handmade With Love">
+    <meta property="og:description" content="تسوق أفضل الهدايا والأعمال اليدوية المصنوعة خصيصاً لك.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="profile.jpg">
+    <meta property="og:site_name" content="Shahd Handmade">
+
+    <title>شهد عبدالمنعم | Handmade With Love</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=El+Messiri:wght@400;500;600;700&family=Outfit:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-text">Shahd</span>
+                <span class="logo-sub">Handmade</span>
+            </a>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#about">من أنا</a></li>
+                    <li><a href="#services">منتجاتنا</a></li>
+                    <li class="dropdown">
+                        <a href="#gallery" class="dropdown-toggle">المعرض <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-right: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#dried-flowers">تجفيف ورد</a></li>
+                            <li><a href="#frames">براويز</a></li>
+                            <li><a href="#engagement-trays">صواني شبكه</a></li>
+                            <li><a href="#candles">شموع</a></li>
+                            <li><a href="#mugs">مجات</a></li>
+                            <li><a href="#wallets">محافظ</a></li>
+                            <li><a href="#baby-suits">سلوبيتات اطفالي</a></li>
+                            <li><a href="#bride-fan">مروحه العروسه</a></li>
+                            <li><a href="#bride-crowns">أطواق برايد</a></li>
+                            <li><a href="#photo-bouquets">بوكيهات صور</a></li>
+                            <li><a href="#manadeel">مناديل كتب الكتاب</a></li>
+                            <li><a href="#konkreet">كونكريت</a></li>
+                            <li><a href="#phone-cover">كفر موبايل</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact" class="btn-nav">تواصل معنا</a></li>
+                </ul>
+                <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+                    <button class="cart-toggle" id="cart-toggle" title="سلة المشتريات" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--primary-color); position: relative;">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-badge" style="position: absolute; top: -8px; right: -8px; background: var(--accent-color); color: #fff; border-radius: 50%; font-size: 0.7rem; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-weight: bold;">0</span>
+                    </button>
+                    <button class="lang-toggle" id="lang-toggle" title="تغيير اللغة" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-color); font-weight: 700; font-family: 'Outfit', sans-serif;">EN</button>
+                    <button class="theme-toggle" id="theme-toggle" title="تبديل الوضع">
+                        <i class="fa-solid fa-moon"></i>
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="fade-in-up">شهد عبدالمنعم</h1>
+            <p class="fade-in-up delay-1">متخصصة في الأعمال اليدوية والهدايا المميزة المصنوعة بحب واهتمام بالتفاصيل،
+                لتقديم لمسة فريدة في كل مناسبة.</p>
+            <div class="hero-btns fade-in-up delay-2">
+                <a href="#services" class="btn btn-primary">تصفحي الأعمال</a>
+                <a href="#contact" class="btn btn-outline">تواصلي معنا </a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <img src="profile.jpg" alt="شهد عبدالمنعم - Handmade Artist">
+                    <div class="image-frame"></div>
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="section-subtitle">نبذه عني</span>
+                    <h2>لمسة فنية تخلد الذكريات</h2>
+                    <p>أنا شهد عبدالمنعم، أعمل في مجال الـ Handmade وأهتم بتقديم منتجات يدوية عالية الجودة تجمع بين
+                        الذوق الراقي، الدقة، واللمسة الفنية.</p>
+                    <p>أؤمن أن التفاصيل الصغيرة تصنع فرقًا كبيرًا، لذلك أحرص على أن يكون كل عمل فريد ومميز ويعبر عن ذوق
+                        صاحبه ويخلد اللحظات المهمة في الحياة.</p>
+
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">صنع يدوي</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">∞</span>
+                            <span class="stat-label">حب وشغف</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <span class="section-subtitle">خدماتنا و منتجاتنا</span>
+                <h2>تشكيلة متنوعة من الهدايا</h2>
+            </div>
+
+            <div class="services-showcase fade-in-up">
+                <h3 class="text-center" style="margin-bottom: 25px;">بوكيهات الزفاف
+                    والخطوبة والستان</h3>
+                <div class="showcase-grid" id="gallery-bouquet">
+                    <!-- Dynamic Content -->
+                </div>
+
+                <h3 class="text-center" style="margin-bottom: 25px; margin-top: 40px;">تشكيلة مميزة</h3>
+                <div class="showcase-grid">
+                    <img src="images/marriage/1.jpg.jpeg" alt="Marriage Bouquet 1">
+                    <img src="images/marriage/2.jpg.jpeg" alt="Marriage Bouquet 2">
+                    <img src="images/marriage/3.jpg.jpeg" alt="Marriage Bouquet 3">
+                    <img src="images/marriage/4.jpg.jpeg" alt="Marriage Bouquet 4">
+                    <img src="images/marriage/5.jpg.jpeg" alt="Marriage Bouquet 5">
+                    <img src="images/marriage/6.jpg.jpeg" alt="Marriage Bouquet 6">
+                    <img src="images/marriage/7.jpg.jpeg" alt="Marriage Bouquet 7">
+                    <img src="images/marriage/8.jpg.jpeg" alt="Marriage Bouquet 8">
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="features-wrapper">
+                <div class="features-content reveal-right">
+                    <span class="section-subtitle">لماذا تختارينا؟</span>
+                    <h2>جودة، دقة، وتميز</h2>
+                    <ul class="features-list">
+                        <li>
+                            <i class="fa-solid fa-check-circle"></i>
+                            <div>
+                                <strong>شغل يدوي 100%</strong>
+                                <p>كل قطعة تُصنع بعناية فائقة من الصفر.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-gem"></i>
+                            <div>
+                                <strong>اهتمام بأدق التفاصيل</strong>
+                                <p>اللمسات الصغيرة هي التي تصنع الفارق.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-layer-group"></i>
+                            <div>
+                                <strong>خامات مختارة بعناية</strong>
+                                <p>نستخدم أجود الخامات لضمان منتج يعيش طويلاً.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <div>
+                                <strong>إمكانية التخصيص</strong>
+                                <p>ننفذ طلبك حسب ذوقك واختيارك الخاص.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="features-image reveal-left">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=600&h=700" alt="تغليف هدايا مميز">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Section -->
+    <section id="reviews" class="section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <span class="section-subtitle">أراء عملائنا</span>
+                <h2>Review</h2>
+            </div>
+
+            <div class="reviews-slider-container reveal-up">
+                <button class="slider-btn prev-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="reviews-wrapper">
+                    <div class="reviews-slider" id="reviews-slider">
+                        <!-- Dynamic Content -->
+                    </div>
+                </div>
+                <button class="slider-btn next-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <span class="section-subtitle">المعرض</span>
+                <h2>من أعمالنا المختارة</h2>
+            </div>
+
+            <!-- Flowers (ورد) -->
+            <div id="dried-flowers" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">تجفيف ورد </h3>
+                <div class="showcase-grid" id="gallery-flowers">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Dried Flowers (تجفيف ورد) -->
+            <div class="category-block reveal-up text-center">
+                <h3 class="text-center">تجفيف ورد بشكل مختلف</h3>
+                <div class="showcase-grid">
+                    <img src="images/flowers/WhatsApp Image 2026-02-14 at 9.14.13 PM.jpeg" alt="تجفيف ورد">
+                    <img src="images/flowers/WhatsApp Image 2026-02-14 at 9.14.14 PM.jpeg" alt="تجفيف ورد">
+                    <img src="images/flowers/WhatsApp Image 2026-02-14 at 9.14.14 PMw.jpeg" alt="تجفيف ورد">
+                    <img src="images/flowers/WhatsApp Image 2026-02-14 at 9.14.143PM.jpeg" alt="تجفيف ورد">
+                </div>
+            </div>
+
+            <!-- Frames (براويز) -->
+            <div id="frames" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">براويز</h3>
+                <div class="showcase-grid" id="gallery-frames">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Engagement Trays (صواني شبكه) -->
+            <div id="engagement-trays" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">صواني شبكه</h3>
+                <div class="showcase-grid" id="gallery-engagement_trays">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Tableau (تابلوه) -->
+            <div class="category-block reveal-up text-center">
+                <h3 class="text-center">تابلوه</h3>
+                <div class="showcase-grid" id="gallery-tablouh">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Candles (شموع) -->
+            <div id="candles" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">شموع</h3>
+                <div class="showcase-grid" id="gallery-candles">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Mugs (مج مزغرف) -->
+            <div id="mugs" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center" style="color: var(--secondary-color); margin: 40px 0 20px;">مج مزغرف</h3>
+                <div class="showcase-grid" id="gallery-mugs">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Wallets (محفظات) -->
+            <div id="wallets" class="category-block reveal-up" style="scroll-margin-top: 100px;">
+                <h3 class="text-center" style="color: var(--primary-color); margin: 40px 0 20px;">محفظات</h3>
+                <div class="showcase-grid" id="gallery-wallets">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Baby Suits (سلوبيتات اطفالي) -->
+            <div id="baby-suits" class="category-block reveal-up" style="scroll-margin-top: 100px;">
+                <h3 class="text-center" style="margin: 40px 0 20px;">سلوبيتات اطفالي</h3>
+                <div class="showcase-grid" id="gallery-solobetat">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Bride's Fan (مروحة العروسة) -->
+            <div id="bride-fan" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">مروحه العروسه</h3>
+                <div class="showcase-grid" id="gallery-marwaha">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Bride's Mirror (مراية العروسة) -->
+            <div class="category-block reveal-up">
+                <h3 class="text-center" style="margin: 40px 0 20px;">مرايه العروسه</h3>
+                <div class="showcase-grid" id="gallery-mrayah">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Bride Crowns (أطواق برايد) -->
+            <div id="bride-crowns" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">أطواق برايد</h3>
+                <div class="showcase-grid" id="gallery-bried">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Photo Bouquets (بوكيهات صور) -->
+            <div id="photo-bouquets" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">بوكيهات صور</h3>
+                <div class="showcase-grid" id="gallery-last">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Manadeel (مناديل كتب الكتاب) -->
+            <div id="manadeel" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">مناديل كتب الكتاب</h3>
+                <div class="showcase-grid" id="gallery-manadeel">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Konkreet (كونكريت) -->
+            <div id="konkreet" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">كونكريت</h3>
+                <div class="showcase-grid" id="gallery-konkreet">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- Phone Cover (كفر موبايل) -->
+            <div id="phone-cover" class="category-block reveal-up text-center" style="scroll-margin-top: 100px;">
+                <h3 class="text-center">كفر موبايل</h3>
+                <div class="showcase-grid" id="gallery-phone_cover">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-box reveal-up">
+                <div class="contact-info" style="text-align: center; width: 100%;">
+                    <h2>تواصلي معنا</h2>
+                    <p>نسعد بتنفيذ طلباتكم واستفساراتكم. يمكنكم التواصل معنا عبر وسائل التواصل الاجتماعي أو عبر واتساب
+                        مباشرة.</p>
+                    <div class="social-links" style="justify-content: center;">
+                        <a href="https://www.facebook.com/share/1EFGU8qNyu/" class="social-icon" target="_blank"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/share/17mxS1V9m8/" class="social-icon" target="_blank"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/hand_made_emy?igsh=aTVwcGJieThnbnM2" class="social-icon"
+                            target="_blank" title="Handmade Emy"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/ema.collection4?igsh=c2lwZXltdGF1MHdt" class="social-icon"
+                            target="_blank" title="Ema Collection"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/201008137386" class="social-icon" target="_blank"><i
+                                class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 50px 0 20px;">
+        <div class="container">
+            <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; text-align: start; margin-bottom: 30px; gap: 20px;">
+                
+                <div class="footer-info" style="flex: 1; min-width: 250px;">
+                    <a href="#" class="logo" style="margin-bottom: 15px; display: inline-block;">
+                        <span class="logo-text">Shahd</span>
+                        <span class="logo-sub">Handmade</span>
+                    </a>
+                    <p data-en="Handmade products made with love and passion." data-ar="منتجات يدوية صنعت بحب وشغف." style="margin-top: 10px; color: var(--text-color); opacity: 0.8;">منتجات يدوية صنعت بحب وشغف.</p>
+                    <div class="social-links" style="margin-top: 20px; justify-content: flex-start;">
+                        <a href="https://www.facebook.com/share/1EFGU8qNyu/" class="social-icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/share/17mxS1V9m8/" class="social-icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/hand_made_emy?igsh=aTVwcGJieThnbnM2" class="social-icon" target="_blank" title="Handmade Emy"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/ema.collection4?igsh=c2lwZXltdGF1MHdt" class="social-icon" target="_blank" title="Ema Collection"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/201008137386" class="social-icon" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h3 data-en="Quick Links" data-ar="روابط سريعة" style="margin-bottom: 20px; color: var(--text-color);">روابط سريعة</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <a href="#services" class="quick-link-btn" data-en="Services" data-ar="الخدمات">الخدمات</a>
+                        <a href="#dried-flowers" class="quick-link-btn" data-en="Dried Flowers" data-ar="تجفيف ورد">تجفيف ورد</a>
+                        <a href="#candles" class="quick-link-btn" data-en="Candles" data-ar="شموع">شموع</a>
+                        <a href="#mugs" class="quick-link-btn" data-en="Mugs" data-ar="مجات">مجات</a>
+                        <a href="#phone-cover" class="quick-link-btn" data-en="Phone Covers" data-ar="كفر موبايل">كفر موبايل</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h3 data-en="More Categories" data-ar="أقسام أخرى" style="margin-bottom: 20px; color: var(--text-color);">أقسام أخرى</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <a href="#engagement-trays" class="quick-link-btn" data-en="Engagement Trays" data-ar="صواني شبكة">صواني شبكة</a>
+                        <a href="#wallets" class="quick-link-btn" data-en="Wallets" data-ar="محافظ">محافظ</a>
+                        <a href="#baby-suits" class="quick-link-btn" data-en="Baby Suits" data-ar="سلوبيت أطفال">سلوبيت أطفال</a>
+                        <a href="#bride-crowns" class="quick-link-btn" data-en="Bride Accessories" data-ar="مستلزمات العروسة">مستلزمات العروسة</a>
+                        <a href="#konkreet" class="quick-link-btn" data-en="Concrete" data-ar="كونكريت">كونكريت</a>
+                        <a href="#manadeel" class="quick-link-btn" data-en="Handkerchiefs" data-ar="مناديل كتب كتاب">مناديل كتب كتاب</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center" style="border-top: 1px solid var(--border-color); padding-top: 20px;">
+                <p data-en="&copy; All Rights Reserved - Shahd Abdelmonem 2025" data-ar="&copy; جميع الحقوق محفوظة – شهد عبدالمنعم 2025">&copy; جميع الحقوق محفوظة – شهد عبدالمنعم 2025</p>
+                <p class="made-with" data-en="Handmade with love <i class='fa-solid fa-heart'></i>" data-ar="Handmade with love <i class='fa-solid fa-heart'></i>">Handmade with love <i class="fa-solid fa-heart"></i></p>
+                <div class="developer-info" style="margin-top: 25px; font-size: 1.2rem; opacity: 1;">
+                    <p>Designed & Developed By<br> <strong>Eng. Badr Frere</strong></p>
+                    <div class="dev-socials" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                        <a href="https://wa.me/201020549760" target="_blank" style="color: #d4af37; font-size: 1.3rem;"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/badrmuhmdd?igsh=MW1oZWFtbWZ3bzhneg%3D%3D&utm_source=qr" target="_blank" style="color: #d4af37; font-size: 1.3rem;"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 5px; color: #d4af37;">01020549760</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3 data-en="Shopping Cart" data-ar="سلة المشتريات">سلة المشتريات</h3>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items will be injected here via JS -->
+            <div class="empty-cart-msg" id="empty-cart-msg" data-en="Your cart is empty" data-ar="السلة فارغة حالياً">السلة فارغة حالياً</div>
+        </div>
+        <div class="cart-footer">
+            <button class="btn-checkout" id="btn-checkout" data-en="Order via WhatsApp" data-ar="إتمام الطلب عبر واتساب">
+                <i class="fa-brands fa-whatsapp"></i> <span class="checkout-text">إتمام الطلب عبر واتساب</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201008137386" class="floating-whatsapp" target="_blank" aria-label="تواصل معنا عبر واتساب">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+</body>
+</html>

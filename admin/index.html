@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | Shahd Handmade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div id="login-section" class="login-container">
+        <div class="login-card">
+            <h2>تسجيل الدخول</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>اسم المستخدم</label>
+                    <input type="text" id="username" required placeholder="User">
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-login" id="login-btn">
+                    <span>دخول</span>
+                    <div class="loader" id="login-loader"></div>
+                </button>
+                <p id="login-error" style="color: var(--danger); text-align: center; margin-top: 15px; display: none;"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="dashboard">
+        <div class="header">
+            <button class="btn-logout" id="logout-btn">تسجيل الخروج</button>
+            <h1>لوحة التحكم</h1>
+        </div>
+
+        <div class="admin-grid">
+            <!-- Sidebar: Add Product -->
+            <div class="form-card">
+                <h3>إضافة منتج جديد</h3>
+                <form id="product-form">
+                    <div class="form-group">
+                        <label>اسم المنتج (اختياري)</label>
+                        <input type="text" id="p-title" placeholder="مثلاً: بوكيه ورد أحمر">
+                    </div>
+                    <div class="form-group">
+                        <label>القسم</label>
+                        <select id="p-category" required>
+                            <option value="bouquet">بوكيهات زفاف</option>
+                            <option value="flowers">تجفيف ورد</option>
+                            <option value="frames">براويز</option>
+                            <option value="engagement_trays">صواني شبكه</option>
+                            <option value="tablouh">تابلوه</option>
+                            <option value="candles">شموع</option>
+                            <option value="mugs">مجات</option>
+                            <option value="wallets">محافظ</option>
+                            <option value="solobetat">سلوبيتات اطفالي</option>
+                            <option value="marwaha">مروحه العروسه</option>
+                            <option value="mrayah">مرايه العروسه</option>
+                            <option value="bried">أطواق برايد</option>
+                            <option value="last">بوكيهات صور</option>
+                            <option value="manadeel">مناديل كتب الكتاب</option>
+                            <option value="konkreet">كونكريت</option>
+                            <option value="phone_cover">كفر موبايل</option>
+                            <option value="reviews">أراء العملاء (Reviews)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الصورة</label>
+                        <input type="file" id="p-image" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label>السعر (اختياري)</label>
+                        <input type="text" id="p-price" placeholder="مثلاً: 250 ج.م">
+                    </div>
+                    <button type="submit" class="btn-login" id="upload-btn">
+                        <span>إضافة المنتج</span>
+                        <div class="loader" id="upload-loader"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Main Content: Product List -->
+            <div class="products-container">
+                <h3>المنتجات المضافة حالياً</h3>
+                <div id="products-list">
+                    <!-- Products will be injected here -->
+                    <p style="text-align: center; color: var(--text-gray); padding: 20px;">جاري تحميل المنتجات...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
