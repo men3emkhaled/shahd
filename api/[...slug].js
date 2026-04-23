@@ -21,7 +21,7 @@ app.use(session({
 
 // Database Connection
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_ZxUaqRlz2h5d@ep-polished-recipe-ali6join-pooler.c-3.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
     ssl: {
         rejectUnauthorized: false
     }
