@@ -12,12 +12,12 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'shahd-secret-key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
-}));
+
+// Simple Token Helper
+const generateToken = () => {
+    const adminPass = process.env.ADMIN_PASSWORD || 'handmade@2026';
+    return Buffer.from(`admin:${adminPass}`).toString('base64');
+};
 
 // Database Connection
 const pool = new Pool({
@@ -69,7 +69,10 @@ initDb();
 
 // Auth Middleware
 const isAuthenticated = (req, res, next) => {
-    if (req.session.admin) {
+    const authHeader = req.headers.authorization;
+    const expectedToken = generateToken();
+    
+    if (authHeader === `Bearer ${expectedToken}`) {
         next();
     } else {
         res.status(401).json({ error: 'Unauthorized' });
@@ -83,20 +86,21 @@ app.post(['/api/login', '/login'], (req, res) => {
     const adminPass = process.env.ADMIN_PASSWORD || 'handmade@2026';
 
     if (username === adminUser && password === adminPass) {
-        req.session.admin = true;
-        res.json({ success: true });
+        const token = generateToken();
+        res.json({ success: true, token });
     } else {
         res.status(401).json({ error: 'Invalid credentials' });
     }
 });
 
 app.post(['/api/logout', '/logout'], (req, res) => {
-    req.session.destroy();
     res.json({ success: true });
 });
 
 app.get(['/api/check-auth', '/check-auth'], (req, res) => {
-    res.json({ authenticated: !!req.session.admin });
+    const authHeader = req.headers.authorization;
+    const expectedToken = generateToken();
+    res.json({ authenticated: authHeader === `Bearer ${expectedToken}` });
 });
 
 // Get all products
