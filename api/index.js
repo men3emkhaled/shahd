@@ -57,7 +57,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Routes
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     const adminUser = 'handmade';
     const adminPass = process.env.ADMIN_PASSWORD || 'handmade@2026';
@@ -70,17 +70,17 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.post('/logout', (req, res) => {
+app.post('/api/logout', (req, res) => {
     req.session.destroy();
     res.json({ success: true });
 });
 
-app.get('/check-auth', (req, res) => {
+app.get('/api/check-auth', (req, res) => {
     res.json({ authenticated: !!req.session.admin });
 });
 
 // Get all products
-app.get('/products', async (req, res) => {
+app.get('/api/products', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM products ORDER BY created_at DESC');
         res.json(result.rows);
@@ -89,7 +89,7 @@ app.get('/products', async (req, res) => {
     }
 });
 
-app.post('/products', isAuthenticated, async (req, res) => {
+app.post('/api/products', isAuthenticated, async (req, res) => {
     try {
         const { title, category, imageUrl, price } = req.body;
 
@@ -111,7 +111,7 @@ app.post('/products', isAuthenticated, async (req, res) => {
 });
 
 // Delete product
-app.delete('/products/:id', isAuthenticated, async (req, res) => {
+app.delete('/api/products/:id', isAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
         await pool.query('DELETE FROM products WHERE id = $1', [id]);
