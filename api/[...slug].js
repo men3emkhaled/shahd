@@ -82,10 +82,14 @@ app.get(['/api/check-auth', '/check-auth'], (req, res) => {
 // Get all products
 app.get(['/api/products', '/products'], async (req, res) => {
     try {
+        if (!process.env.DATABASE_URL) {
+            return res.status(500).json({ error: 'DATABASE_URL is not set in environment variables' });
+        }
         const result = await pool.query('SELECT * FROM products ORDER BY created_at DESC');
         res.json(result.rows);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error('DB Query Error:', err);
+        res.status(500).json({ error: 'Database error: ' + err.message });
     }
 });
 
