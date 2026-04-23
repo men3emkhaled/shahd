@@ -105,11 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Upload logic
     productForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', document.getElementById('p-title').value);
-        formData.append('category', document.getElementById('p-category').value);
-        formData.append('image', document.getElementById('p-image').files[0]);
-        formData.append('price', document.getElementById('p-price').value);
+        const productData = {
+            title: document.getElementById('p-title').value,
+            category: document.getElementById('p-category').value,
+            imageUrl: document.getElementById('p-image-url').value,
+            price: document.getElementById('p-price').value
+        };
 
         const loader = document.getElementById('upload-loader');
         const uploadBtn = document.getElementById('upload-btn');
@@ -120,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const res = await fetch('/api/products', {
                 method: 'POST',
-                body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(productData)
             });
 
             if (res.ok) {
