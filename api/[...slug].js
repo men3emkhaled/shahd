@@ -30,6 +30,7 @@ const pool = new Pool({
 // Initialize Database
 const initDb = async () => {
     try {
+        // Create table if not exists
         await pool.query(`
             CREATE TABLE IF NOT EXISTS products (
                 id SERIAL PRIMARY KEY,
@@ -40,7 +41,26 @@ const initDb = async () => {
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         `);
-        console.log('Database initialized');
+
+        // Ensure columns exist (for existing tables)
+        const columns = [
+            { name: 'title', type: 'TEXT' },
+            { name: 'image_url', type: 'TEXT' },
+            { name: 'price', type: 'TEXT' }
+        ];
+
+        for (const col of columns) {
+            await pool.query(`
+                DO $$ 
+                BEGIN 
+                    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='products' AND column_name='${col.name}') THEN 
+                        ALTER TABLE products ADD COLUMN ${col.name} ${col.type}; 
+                    END IF; 
+                END $$;
+            `);
+        }
+        
+        console.log('Database initialized and synced');
     } catch (err) {
         console.error('Error initializing database:', err);
     }
