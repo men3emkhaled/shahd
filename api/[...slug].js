@@ -83,7 +83,12 @@ app.get(['/api/check-auth', '/check-auth'], (req, res) => {
 app.get(['/api/products', '/products'], async (req, res) => {
     try {
         if (!process.env.DATABASE_URL) {
-            return res.status(500).json({ error: 'DATABASE_URL is missing' });
+            const availableKeys = Object.keys(process.env).filter(k => !k.includes('SECRET') && !k.includes('PASSWORD') && !k.includes('URL'));
+            return res.status(500).json({ 
+                error: 'DATABASE_URL is missing',
+                detected_keys: Object.keys(process.env),
+                message: 'Please ensure DATABASE_URL is added to Vercel Environment Variables'
+            });
         }
         
         // Ensure table exists (auto-repair)
